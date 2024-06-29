@@ -3523,13 +3523,23 @@ inline int loadPCDFile(const std::string &file_name, pcl::PCLPointCloud2 &cloud,
  * future versions of PCL.
  * \ingroup io
  */
-inline int savePCDFile(const std::string &file_name,
-                       const pcl::PCLPointCloud2 &cloud,
-                       const Vector4f &origin = Vector4f::Zero(),
-                       const Quaternionf &orientation = Quaternionf::Identity(),
-                       const bool binary_mode = false) {
+int savePCDFile(const std::string &file_name, const pcl::PCLPointCloud2 &cloud,
+                const Vector4f &origin = Vector4f::Zero(),
+                const Quaternionf &orientation = Quaternionf::Identity(),
+                const bool binary_mode = false) {
   PCDWriter w;
   return (w.write(file_name, cloud, origin, orientation, binary_mode));
+}
+
+/**
+ * @brief Save point cloud dato to a binary compressed PCD file
+ */
+int savePCDFileBinaryCompressed(
+    const std::string &file_name, const pcl::PCLPointCloud2 &cloud,
+    const Vector4f &origin = Vector4f::Zero(),
+    const Quaternionf &orientation = Quaternionf::Identity()) {
+  PCDWriter w;
+  return w.writeBinaryCompressed(file_name, cloud, origin, orientation);
 }
 
 }  // namespace io
